@@ -19,11 +19,6 @@ public class RunMotor implements Command {
         motors.run(1);
     }
     
-    @Override
-    public void end(boolean interrupted) {
-        motors.stop();
-    }
-    
     private Set<Subsystem> requirements = new HashSet<>();
     
     @Override
