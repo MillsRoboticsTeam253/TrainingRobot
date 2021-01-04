@@ -16,7 +16,8 @@ public class RunMotor implements Command {
     
     @Override
     public void execute() {
-        motors.run(1);
+        // run at half speed
+        motors.run(0.5);
     }
 
     @Override
