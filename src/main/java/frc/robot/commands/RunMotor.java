@@ -18,6 +18,10 @@ public class RunMotor implements Command {
     public void execute() {
         motors.run(1);
     }
+
+    @Override
+    public void end(boolean interrupted) {
+    }
     
     private Set<Subsystem> requirements = new HashSet<>();
     

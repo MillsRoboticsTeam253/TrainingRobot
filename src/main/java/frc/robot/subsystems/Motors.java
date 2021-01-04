@@ -23,9 +23,4 @@ public class Motors implements Subsystem {
   public void run(int speed) {
     talon.set(speed);
   }
-  
-  // stops the motors
-  public void stop() {
-    this.run(0);
-  }
 }
