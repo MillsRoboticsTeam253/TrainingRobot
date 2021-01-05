@@ -20,7 +20,7 @@ public class Motors implements Subsystem {
   private Motors() {}
   
   // runs the motors to a speed [0, 1]
-  public void run(int speed) {
+  public void run(double speed) {
     talon.set(speed);
   }
 }
