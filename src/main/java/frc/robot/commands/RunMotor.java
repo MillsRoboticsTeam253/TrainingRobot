@@ -5,6 +5,7 @@ import java.util.Set;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Motors;
 
 public class RunMotor implements Command {
@@ -17,11 +18,12 @@ public class RunMotor implements Command {
     @Override
     public void execute() {
         // run at half speed
-        motors.run(0.5);
+        motors.run(RobotContainer.getSpeed());
     }
 
     @Override
     public void end(boolean interrupted) {
+        motors.run(0);
     }
     
     private Set<Subsystem> requirements = new HashSet<>();
