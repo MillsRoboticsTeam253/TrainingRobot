@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.RunMotor;
@@ -48,10 +49,13 @@ public class RobotContainer {
    * Binds operator input to Commands
    */
   private void bindIO() {
-    controller_X.whenPressed(new RunMotor(motors));
+    motors.setDefaultCommand(new RunMotor(motors));
   }
   
   private void initSubsystems() {
     motors = Motors.getInstance();
+  }
+  public static double getSpeed() {
+    return controller.getY(GenericHID.Hand.kLeft);
   }
 }
