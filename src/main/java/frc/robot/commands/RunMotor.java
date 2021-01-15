@@ -16,12 +16,14 @@ public class RunMotor implements Command {
     
     @Override
     public void execute() {
-        // run at half speed
-        motors.run(0.5);
+        // run at speed proportional to an xbox joystick
+        motors.run(RobotContainer.getMotorSpeed());
     }
 
     @Override
     public void end(boolean interrupted) {
+        // turn motors off
+        motors.run(0.0);
     }
     
     private Set<Subsystem> requirements = new HashSet<>();

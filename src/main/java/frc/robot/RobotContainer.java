@@ -36,6 +36,11 @@ public class RobotContainer {
     return instance;
   }
   
+  //translate y-coordinate of xbox left joystick to a motor speed value
+  public static double getMotorSpeed() {
+    return controller.getY(GenericHID.Hand.kLeft);
+  }
+
   private RobotContainer() {
     // Initialize our subsystems
     initSubsystems();
@@ -48,7 +53,7 @@ public class RobotContainer {
    * Binds operator input to Commands
    */
   private void bindIO() {
-    controller_X.whenPressed(new RunMotor(motors));
+    motors.setDefaultCommand(new RunMotor(motors));
   }
   
   private void initSubsystems() {
