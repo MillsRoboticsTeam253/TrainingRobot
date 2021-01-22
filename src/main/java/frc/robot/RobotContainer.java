@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.RunMotor;
 import frc.robot.subsystems.Motors;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj.GenericHID;
 
 /**
@@ -23,13 +25,15 @@ public class RobotContainer {
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
-   
-  // Subsystems
-  private static Motors motors;
   
   // Controllers
   private static final XboxController controller = new XboxController(Constants.IO.Controller.kPort);
   private static final JoystickButton controller_X = new JoystickButton(controller, 3);
+
+  
+  // Subsystems
+  private static Motors motors;
+  private static Drivetrain drivetrain = Drivetrain.getInstace();
    
   private static RobotContainer instance;
   public static RobotContainer getInstance() {
@@ -40,6 +44,18 @@ public class RobotContainer {
   //translate y-coordinate of xbox left joystick to a motor speed value
   public static double getMotorSpeed() {
     return controller.getY(GenericHID.Hand.kLeft);
+  }
+
+  public static double getThrottle() {
+    return controller.getY(GenericHID.Hand.kLeft);
+  }
+
+  public static double getTurn() {
+    return controller.getX(GenericHID.Hand.kRight);
+  }
+
+  public static double getAltThrottle() { //For Tank Drive only
+    return controller.getY(GenericHID.Hand.kRight);
   }
 
   private RobotContainer() {
@@ -55,6 +71,7 @@ public class RobotContainer {
    */
   private void bindIO() {
     motors.setDefaultCommand(new RunMotor(motors));
+    drivetrain.setDefaultCommand(new Drive(Drive.State.curvatureDrive));
   }
   
   private void initSubsystems() {
