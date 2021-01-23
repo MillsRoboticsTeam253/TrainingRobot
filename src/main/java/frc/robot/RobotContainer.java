@@ -33,7 +33,7 @@ public class RobotContainer {
   
   // Subsystems
   private static Motors motors;
-  private static Drivetrain drivetrain = Drivetrain.getInstace();
+  private static Drivetrain drivetrain = Drivetrain.getInstance();
    
   private static RobotContainer instance;
   public static RobotContainer getInstance() {
