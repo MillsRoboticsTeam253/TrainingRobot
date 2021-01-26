@@ -18,7 +18,7 @@ public class RunMotor implements Command {
     @Override
     public void execute() {
         // run at half speed
-        motors.run(RobotContainer.getSpeed());
+        motors.run(RobotContainer.getThrottle());
     }
 
     @Override

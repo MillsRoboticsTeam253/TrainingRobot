@@ -11,7 +11,9 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.Drive;
 import frc.robot.commands.RunMotor;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Motors;
 
 /**
@@ -27,11 +29,13 @@ public class RobotContainer {
    
   // Subsystems
   private static Motors motors;
+  private static DriveTrain driveTrain;
   
   // Controllers
   private static final XboxController controller = new XboxController(Constants.IO.Controller.kPort);
   private static final JoystickButton controller_X = new JoystickButton(controller, 3);
-   
+  
+
   private static RobotContainer instance;
   public static RobotContainer getInstance() {
     if (instance == null) instance = new RobotContainer();
@@ -51,15 +55,22 @@ public class RobotContainer {
    */
   private void bindIO() {
     CommandScheduler.getInstance().setDefaultCommand(motors, new RunMotor(motors));
+    CommandScheduler.getInstance().setDefaultCommand(driveTrain, new Drive(driveTrain));
     controller_X.whenHeld(new RunMotor(motors));
     
-  }
-
-  public static double getSpeed() {
-    return controller.getY(GenericHID.Hand.kLeft);
   }
   
   private void initSubsystems() {
     motors = Motors.getInstance();
+    driveTrain = DriveTrain.getInstance();
   }
+
+  public static double getThrottle(){
+    return controller.getY(GenericHID.Hand.kLeft);
+  }
+
+  public static double getTurnValue(){
+    return controller.getX(GenericHID.Hand.kRight);
+  }
+
 }
